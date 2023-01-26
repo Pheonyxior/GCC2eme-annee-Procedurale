@@ -1,0 +1,45 @@
+private void generateDungeon(RoomBehaviour startingRoom, int cycles)
+    {
+		
+        List<RoomBehaviour> reached = new List<RoomBehaviour>();
+        reached.Add(startingRoom);
+
+        List<List<RoomBehaviour>> fringes = new List<List<RoomBehaviour>>();
+        fringes.Add(new List<RoomBehaviour>());
+
+        fringes[0].Add(startingRoom);
+
+        for(int currentCycle = 1; currentCycle < cycles; currentCycle++) // Pour chaque cycles de générations
+        {
+            fringes.Add(new List<RoomBehaviour>());
+
+            foreach(RoomBehaviour room in fringes[currentCycle-1]) // Pour chaque room instanciés dans le cycle précédent
+            {
+				foreach(Vector2 tile in AdgacentTiles(currentRoom) // Pour chaque room que l'on va instancier autour des rooms instanciés dans le cycle précédents
+				{
+					string data = "";
+					
+					for(int dir = 0; dir < directions.Length-1; dir++) // Pour chaque directions autour de la tile que l'on visite
+					{
+						Vector2 neighborTile = new Vector2(tile.x + directions[dir].x, tile.y + directions[dir].y);
+						// On vérifie s'il y a déjà une room voisine en regardant la position de la tile(tile.x, tile.y) + la direction vers laquelle on regarde(directions[dir]...)
+						RoomBehaviour neighborRoom = RoomOnTile(neighborTile)
+						
+						if (neighborRoom != null)
+						{
+							if(neighbor.HasOppositeWall(directions[dir])
+							{
+								data += wallData[dir];
+							}
+							else 
+							{
+								data += entryData[dir];
+							}
+						}
+					}
+					
+					fringes[currentCycle].Add(GenerateRoom(new Vector3(tile.x, tile.y, 0f), data)
+				}
+            }
+        }
+    }
